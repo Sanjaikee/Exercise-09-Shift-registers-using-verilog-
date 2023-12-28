@@ -1,8 +1,16 @@
 
 # Experiment--09-Implementation-of Shift-registers-using-verilog-
-### AIM: To implement PISO , PIPO,PISO  using verilog and validating their functionality using their functional tables
-### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   Quartus prime
+### AIM: 
+
+To implement PISO , PIPO,PISO  using verilog and validating their functionality using their functional tables
+
+### HARDWARE REQUIRED:
+
+– PC, Cyclone II , USB flasher
+
+### SOFTWARE REQUIRED: 
+Quartus prime
+
 ### THEORY 
 Shift registers are basically of 4 types. These are:
 
@@ -41,26 +49,87 @@ FIGURE-04
 A Parallel in Parallel out (PIPO) shift register is used as a temporary storage device and like SISO Shift register it acts as a delay element.
 
 ### Procedure
-/* write all the steps invloved */
+1.Use quartus software and import required modules.
+
+2.Assign inputs and outputs for shift registers.
+
+3.Assign logic for input to give output at positive edge.
+
+4.Perform opertaions and produce rtl circuit.
 
 
 
 ### PROGRAM 
 /*
+
 Program for  Implementation-of Shift-registers-using-verilog-
-Developed by: 
-RegisterNumber:  
+
+Developed by: Archana.k
+
+RegisterNumber:  212222240011
+
 */
+```
+## SIPO
 
+module SIPO(c,si,po);
+input c,si;
+output [7:0] po;
+reg [7:0] temp;
+always @ (posedge c)
+begin
+temp = {temp[6:0],si};
+end
+assign po = temp;
+endmodule 
+```
+```
+## PISO
+mmodule PISO(Clk,Pin,load,so);
+input load,Clk;
+input [3:0] Pin;
+output reg so;
+reg [3:0] temp;
+always @ (posedge Clk)
+begin 
+if(load)
+temp <= Pin;
+else
+begin
+so<=temp[3];
+temp <={temp[2:0],1'b0};
+end
+end
+endmodule
+```
 
-
-
+```
+## PIPO
+module PIPO (Pi,Clk,Po);
+input Clk;
+input [3:0]Pi;
+output reg[3:0]Po;
+always@(posedge Clk)
+begin
+Po=Pi;
+end 
+endmodule
+```
 
 
 ### RTL LOGIC  REGISTERS   
 
+## SIPO
 
+![image](https://github.com/22009150/Exercise-09-Shift-registers-using-verilog-/assets/118708624/c1cb37e6-387f-4528-a3b8-873d0a186bc5)
 
+## PISO
+
+![image](https://github.com/22009150/Exercise-09-Shift-registers-using-verilog-/assets/118708624/7448efa5-fc3f-423c-b81f-c391a7b739c8)
+
+## PIPO
+
+![image](https://github.com/22009150/Exercise-09-Shift-registers-using-verilog-/assets/118708624/a42b3c2e-4b75-4117-85e1-bac99d2236fe)
 
 
 
@@ -69,11 +138,20 @@ RegisterNumber:
 
 ### TIMING DIGRAMS FOR SHIFT REGISTERS
 
+## SIPO
+
+![image](https://github.com/22009150/Exercise-09-Shift-registers-using-verilog-/assets/118708624/fd911223-6cc8-44ea-8c5a-4ceee991fbbe)
 
 
+## PISO
 
+![image](https://github.com/22009150/Exercise-09-Shift-registers-using-verilog-/assets/118708624/2baa400e-4a7f-445b-bb5f-52dc12c42eb7)
 
+## PIPO
 
+![image](https://github.com/22009150/Exercise-09-Shift-registers-using-verilog-/assets/118708624/8ab49b49-7e63-48b1-bf71-b5fbef515653)
 
 
 ### RESULTS 
+
+Hence SIPO,PISO and PIPO are implemented using verilog programming and their functionality is validated successfully.
